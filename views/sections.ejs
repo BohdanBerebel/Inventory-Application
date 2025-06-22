@@ -1,0 +1,23 @@
+<div style="border: 2px solid red">
+  <h3><%= title.slice(0,1).toUpperCase() + title.slice(1)%></h3>
+  <a
+    href="/delete/section/<%= title %>"
+    onclick='return confirm("Are you sure?")'
+    >Delete the entire section</a
+  >
+  <%if(!items.length) {%>
+  <p>This category is empty</p>
+  <%}%> <% for(let item of items) { %>
+  <div style="border: 2px solid yellow">
+    <% for(let [key, value] of Object.entries(item)) { %>
+    <p><%=key.slice(0,1).toUpperCase() + key.slice(1) %>: <%=value%></p>
+    <%}%>
+    <a
+      href="/delete/item/<%= item.id %>/<%= title %>"
+      onclick='return confirm("Are you sure?")'
+      >Delete this item</a
+    >
+  </div>
+  <%} %>
+  <a href="/openAddItemPage/<%=title%>">Add new item</a>
+</div>

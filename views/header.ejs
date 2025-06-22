@@ -1,0 +1,16 @@
+<head>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<header>
+  <h1>Welcome to my new shop!</h1>
+  <nav>
+    <h2>Sections</h2>
+    <a href="/">All commodities</a>
+    <% for(const name of headers) { %>
+    <a href="/section/<%=name%>">
+      <%= name.slice(0,1).toUpperCase() + name.slice(1)%>
+    </a>
+    <% } %>
+  </nav>
+  <a href="/openAddNewSection">Add new section</a>
+</header>

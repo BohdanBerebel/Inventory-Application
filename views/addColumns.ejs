@@ -1,0 +1,49 @@
+<%- include('header', {headers}) %>
+<form action="createSection" method="post" onsubmit="addAdditionalInfo(event)">
+  <h2>Fill out columns of your new <%= locals.sectionName%> section</h2>
+  <% for(let i = 1; i <= locals.numberOfColumns; i++) { %>
+  <p>
+    <label for="<%= i %>"
+      >Name your <%= i %> column:
+      <input id="<%= i %>" type="text" name="columns[]" required />
+    </label>
+  </p>
+  <% } %>
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+  function addAdditionalInfo(event) {
+    event.preventDefault(); // stop the default form submission
+
+    const form = event.target;
+    const formData = new FormData(form);
+
+    // Get all values of inputs named "columns[]"
+    const columns = formData.getAll("columns[]");
+
+    // Prepare the data object to send
+    const dataToSend = {
+      sectionName: "<%= sectionName %>", // Injected from EJS
+      numberOfColumns: Number("<%= numberOfColumns %>"), // Make sure it's a number
+      columns: columns, // Array of column names from form
+    };
+
+    // Debug log to check data structure before sending
+    console.log("Sending data:", dataToSend);
+
+    // Send data as JSON via fetch
+    fetch("/createSection", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataToSend),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        window.location.href = "/";
+      })
+      .catch((err) => console.error("Error:", err));
+  }
+</script>

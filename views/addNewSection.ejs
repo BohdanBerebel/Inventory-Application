@@ -1,0 +1,25 @@
+<%- include('header', {headers}) %>
+<div>
+  <form action="/addNewSection" method="post">
+    <p>
+      <label for="sectionName"
+        >Name of the new section:
+        <input id="sectionName" type="text" name="sectionName" required />
+      </label>
+    </p>
+    <p>
+      <label for="numberOfColumns"
+        >Specify number of columns:
+        <input
+          id="numberOfColumns"
+          name="numberOfColumns"
+          type="number"
+          max="4"
+          min="1"
+          required
+        />
+      </label>
+    </p>
+    <button>Submit</button>
+  </form>
+</div>

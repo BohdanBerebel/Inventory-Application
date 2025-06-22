@@ -1,0 +1,25 @@
+<div>
+  <form action="/addNewItem/<%=locals.title%>" method="post">
+    <h2>Enter details to add a new item to the <%=locals.title%> section:</h2>
+    <% for(let column of locals.columns) {%>
+    <p>
+      <label for="<%=column%>">
+        <%=column.slice(0,1).toUpperCase() + column.slice(1)%>
+        <input
+          name="<%=column%>"
+          id="<%=column%>"
+          type="<%= column==='release' ? 'date' : 'text'%>"
+          required
+        />
+      </label>
+    </p>
+    <%}%>
+    <p>
+      <label for="password">
+        Password:
+        <input name="password" id="password" type="password" />
+      </label>
+    </p>
+    <button>Submit</button>
+  </form>
+</div>
